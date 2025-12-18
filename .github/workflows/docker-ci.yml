@@ -1,0 +1,20 @@
+name: Docker CI Day 37
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build_and_test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v3
+
+      - name: Build Docker image
+        run: docker build -t infra-test:ci .
+
+      - name: Run Docker container (test)
+        run: docker run --rm infra-test:ci
